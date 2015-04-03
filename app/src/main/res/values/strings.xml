@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Schedulerama</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">Welcome to Schedulerama!!!!</string>
+    <string name="create_new_button">Create new event</string>
+    <string name="load_button">Load past event</string>
+    <string name="num_teams">Number of teams</string>
+    <string name="num_games">Number of games</string>
+    <string name="schedule_button">Schedule!</string>
+
+</resources>
