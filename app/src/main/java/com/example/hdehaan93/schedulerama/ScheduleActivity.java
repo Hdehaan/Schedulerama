@@ -33,6 +33,7 @@ public class ScheduleActivity extends ActionBarActivity{
     ArrayAdapter<Games> adp;
     private Event mEvent;
     public static String mGAMES_LIST_STRING ="GAMES_LIST";
+    public static String mGAME_NAME_STRING = "WHAT_IS_THE_NAME_OF_THE_GAME";
 
     /////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Games> ScheduleEvent(double teams, double games){
@@ -73,31 +74,7 @@ public class ScheduleActivity extends ActionBarActivity{
         mScheduleListview.setAdapter(adp);
 
 
-       // mScheduleListview.addView();
-       // RelativeLayout.LayoutParams mParams;// = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-       // ArrayList<TextView> mTextViews = new ArrayList<TextView>();
-       // String AllText=" ";
 
-
-
-        /*for(int i=0; i<games.size();i++){
-            AllText+="\n"+games.get(i).getgGameName() + "\n";
-            for(int j=0;j<games.get(i).getgMatchUps().size();j++){
-                AllText+=games.get(i).getgMatchUps().get(j) + " ";
-            }
-            //this if for the first one
-            //put in a loop, if one do this
-        // if two do other thing if 3 do other thing 4 or more are all the same
-        for(int i=0; i<5;i++){
-            TextView x = new TextView(this);
-            mParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            mParams=SetParams(mParams,i,mTextViews);
-            x.setLayoutParams(mParams);
-            x.setText("text for "+ (i+1));
-            mScheduleLayout.addView(x);
-            x.setId(i);
-            mTextViews.add(x);
-        }*/
         return s;
 
     }
@@ -113,7 +90,7 @@ public class ScheduleActivity extends ActionBarActivity{
         mNumofGames=mDataBundle.getDouble(DataActivity.mNUM_GAMES_STRING);
 
         mEvent= new Event();
-        mEvent.setmGames(ScheduleEvent(mNumofTeams,mNumofGames));
+        mEvent.setmGames(ScheduleEvent(mNumofTeams, mNumofGames));
         PrintEvent(mEvent.getmGames());
         mScheduleListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,7 +101,10 @@ public class ScheduleActivity extends ActionBarActivity{
                 Games g = (Games)parent.getItemAtPosition(position);
                 //mDataBundle.putCharSequenceArrayList(mGAMES_LIST_STRING,g.getgMatchUps());
                // mDataBundle.putStringArray(mGAMES_LIST_STRING,g.getgMatchUps());
-
+                Intent i= new Intent(ScheduleActivity.this, MatchUpActivity.class);
+                i.putStringArrayListExtra(mGAMES_LIST_STRING,g.getgMatchUps());
+                i.putExtra(mGAME_NAME_STRING, g.getgGameName());
+                startActivity(i);
 
             }
         });
@@ -199,3 +179,31 @@ public class ScheduleActivity extends ActionBarActivity{
 
         return p;
     }*/
+
+
+
+// mScheduleListview.addView();
+// RelativeLayout.LayoutParams mParams;// = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+// ArrayList<TextView> mTextViews = new ArrayList<TextView>();
+// String AllText=" ";
+
+
+
+        /*for(int i=0; i<games.size();i++){
+            AllText+="\n"+games.get(i).getgGameName() + "\n";
+            for(int j=0;j<games.get(i).getgMatchUps().size();j++){
+                AllText+=games.get(i).getgMatchUps().get(j) + " ";
+            }
+            //this if for the first one
+            //put in a loop, if one do this
+        // if two do other thing if 3 do other thing 4 or more are all the same
+        for(int i=0; i<5;i++){
+            TextView x = new TextView(this);
+            mParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            mParams=SetParams(mParams,i,mTextViews);
+            x.setLayoutParams(mParams);
+            x.setText("text for "+ (i+1));
+            mScheduleLayout.addView(x);
+            x.setId(i);
+            mTextViews.add(x);
+        }*/

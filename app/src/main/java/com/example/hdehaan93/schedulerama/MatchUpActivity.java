@@ -8,18 +8,38 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by hdehaan93 on 3/26/15.
  */
 public class MatchUpActivity extends ActionBarActivity {
 
-   private TextView mMatchUps;
+   private TextView mMatchUp_textView;
+    public ArrayList<String> mMatchUps= new ArrayList<String>();
+    public String mGameName;
+
+    void Print_MatchUps(ArrayList<String> g, String name){
+
+        String AllText="";
+
+            AllText+="\n"+name + "\n";
+            for(int j=0;j<g.size();j++){
+                AllText+=g.get(j) + "\n";
+            }
+        mMatchUp_textView.setText(AllText);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data);
+        setContentView(R.layout.activity_matchup);
 
-        mMatchUps=(TextView)findViewById(R.id.match_up_text_view);
+        mMatchUp_textView=(TextView)findViewById(R.id.match_up_text_view);
+        mMatchUps=getIntent().getStringArrayListExtra(ScheduleActivity.mGAMES_LIST_STRING);
+        mGameName=getIntent().getStringExtra(ScheduleActivity.mGAME_NAME_STRING);
+        Print_MatchUps(mMatchUps,mGameName);
+
         /*mScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

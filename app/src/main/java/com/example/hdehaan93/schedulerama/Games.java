@@ -27,6 +27,10 @@ public class Games{
     public ArrayList<String> getgMatchUps() {
         return gMatchUps;
     }
+    @Override
+    public String toString(){
+       return gGameName;
+    }
 
     private ArrayList<String> gMatchUps;
     private String gGameName;
