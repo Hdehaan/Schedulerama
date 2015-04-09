@@ -27,6 +27,8 @@ public class ScheduleActivity extends ActionBarActivity{
     private Bundle mDataBundle;
     private double mNumofTeams;
     private double mNumofGames;
+    public ArrayList<String> mGameNames;
+    public ArrayList<String> mTeamNames;
     private TextView mScheduleTextView;
     private RelativeLayout mScheduleLayout;
     private ListView mScheduleListview;
@@ -36,18 +38,18 @@ public class ScheduleActivity extends ActionBarActivity{
     public static String mGAME_NAME_STRING = "WHAT_IS_THE_NAME_OF_THE_GAME";
 
     /////////////////////////////////////////////////////////////////////////////////////////
-    private ArrayList<Games> ScheduleEvent(double teams, double games){
+    private ArrayList<Games> ScheduleEvent(ArrayList<String> teams, ArrayList<String> games){
         ArrayList<String> mMatchups = new ArrayList<String>();
         ArrayList<Games> mGameList = new ArrayList<Games>();
         mScheduleTextView.setText("The Schedule is:");
-        for(int i=1;i<=teams;i++){
+        for(int i=0;i<teams.size();i++){
 
-            for(int j=i+1;j<=teams;j++){
-                mMatchups.add(i+" vs. " + j);
+            for(int j=i+1;j<teams.size();j++){
+                mMatchups.add(teams.get(i)+" vs. " + teams.get(j));
             }
         }
-        for(int i=1;i<= games;i++){
-            mGameList.add(new Games("Game "+i));
+        for(int i=0;i< games.size();i++){
+            mGameList.add(new Games(games.get(i)));
         }
         //this is the actual logic of how things get scheduled. right now it is just round robin
         for (int i=0;i< mMatchups.size();i++){
@@ -88,9 +90,11 @@ public class ScheduleActivity extends ActionBarActivity{
         mDataBundle=getIntent().getBundleExtra(BUNDLE_STRING);
         mNumofTeams=mDataBundle.getDouble(DataActivity.mNUM_TEAMS_STRING);
         mNumofGames=mDataBundle.getDouble(DataActivity.mNUM_GAMES_STRING);
+        mGameNames=getIntent().getStringArrayListExtra(NamingActivity.GAMES_STRING);
+        mTeamNames=getIntent().getStringArrayListExtra(NamingActivity.TEAM_STRING);
 
         mEvent= new Event();
-        mEvent.setmGames(ScheduleEvent(mNumofTeams, mNumofGames));
+        mEvent.setmGames(ScheduleEvent(mTeamNames,mGameNames));
         PrintEvent(mEvent.getmGames());
         mScheduleListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

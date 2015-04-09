@@ -17,8 +17,8 @@ public class DataActivity extends ActionBarActivity{
     private NumberPicker mTeamNumPicker;
     private NumberPicker mGameNumPicker;
     private Button mScheduleButton;
-    private double mNumofTeams=1;
-    private double mNumofGames=1;
+    private double mNumofTeams=2;
+    private double mNumofGames=2;
     public static String mNUM_TEAMS_STRING ="NUM_OF_TEAMS";
     public static String mNUM_GAMES_STRING ="NUM_OF_GAMES";
     private Bundle mDataBundle;
@@ -33,19 +33,19 @@ public class DataActivity extends ActionBarActivity{
         mTeamNumPicker=(NumberPicker)findViewById(R.id.team_numberPicker);
         mGameNumPicker=(NumberPicker)findViewById(R.id.game_numberPicker);
 
-        mGameNumPicker.setMaxValue(20);
-        mGameNumPicker.setMinValue(1);
-        mGameNumPicker.setWrapSelectorWheel(true);
-        mTeamNumPicker.setMaxValue(20);
-        mTeamNumPicker.setMinValue(1);
-        mTeamNumPicker.setWrapSelectorWheel(true);
+        mGameNumPicker.setMaxValue(15);
+        mGameNumPicker.setMinValue(2);
+        mGameNumPicker.setWrapSelectorWheel(false);
+        mTeamNumPicker.setMaxValue(15);
+        mTeamNumPicker.setMinValue(2);
+        mTeamNumPicker.setWrapSelectorWheel(false);
 
 
         mScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // show the schedule- next activity
-                Intent i= new Intent(DataActivity.this, ScheduleActivity.class);
+                Intent i= new Intent(DataActivity.this, NamingActivity.class);
                 mDataBundle.putDouble(mNUM_TEAMS_STRING,mNumofTeams);
                 mDataBundle.putDouble(mNUM_GAMES_STRING,mNumofGames);
                 i.putExtra(ScheduleActivity.BUNDLE_STRING,mDataBundle);
