@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
 /**
@@ -21,6 +22,8 @@ public class DataActivity extends ActionBarActivity{
     private double mNumofGames=2;
     public static String mNUM_TEAMS_STRING ="NUM_OF_TEAMS";
     public static String mNUM_GAMES_STRING ="NUM_OF_GAMES";
+    public static String mEVENT_NAME_STRING = "NAME_OF_EVENT";
+    private EditText mEventNameEdit;
     private Bundle mDataBundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class DataActivity extends ActionBarActivity{
         mScheduleButton= (Button)findViewById(R.id.schedule_button);
         mTeamNumPicker=(NumberPicker)findViewById(R.id.team_numberPicker);
         mGameNumPicker=(NumberPicker)findViewById(R.id.game_numberPicker);
+        mEventNameEdit=(EditText)findViewById(R.id.event_name_text_edit);
 
         mGameNumPicker.setMaxValue(15);
         mGameNumPicker.setMinValue(2);
@@ -46,6 +50,7 @@ public class DataActivity extends ActionBarActivity{
             public void onClick(View v) {
                 // show the schedule- next activity
                 Intent i= new Intent(DataActivity.this, NamingActivity.class);
+                mDataBundle.putCharSequence(mEVENT_NAME_STRING,mEventNameEdit.getText().toString());
                 mDataBundle.putDouble(mNUM_TEAMS_STRING,mNumofTeams);
                 mDataBundle.putDouble(mNUM_GAMES_STRING,mNumofGames);
                 i.putExtra(ScheduleActivity.BUNDLE_STRING,mDataBundle);

@@ -31,6 +31,7 @@ public class ScheduleActivity extends ActionBarActivity{
     public ArrayList<String> mTeamNames;
     private TextView mScheduleTextView;
     private RelativeLayout mScheduleLayout;
+    private String mEventName;
     private ListView mScheduleListview;
     ArrayAdapter<Games> adp;
     private Event mEvent;
@@ -96,6 +97,7 @@ public class ScheduleActivity extends ActionBarActivity{
         mEvent= new Event();
         mEvent.setmGames(ScheduleEvent(mTeamNames,mGameNames));
         PrintEvent(mEvent.getmGames());
+        //save everything here
         mScheduleListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

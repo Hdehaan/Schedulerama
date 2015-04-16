@@ -110,7 +110,6 @@ public class NamingActivity extends ActionBarActivity {
                 i.putExtra(ScheduleActivity.BUNDLE_STRING,mDataBundle);
                 i.putStringArrayListExtra(GAMES_STRING,mGameNames);
                 i.putStringArrayListExtra(TEAM_STRING,mTeamNames);
-
                 startActivity(i);
 
 
