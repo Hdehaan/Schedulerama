@@ -1,5 +1,8 @@
 package com.example.hdehaan93.schedulerama;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -32,7 +35,20 @@ public class Games{
        return gGameName;
     }
 
+    public JSONObject toJSON () throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_GAMENAME,gGameName);
+        json.put(JSON_MATCHUPS,gMatchUps);
+        return json;
+    }
+
+
     private ArrayList<String> gMatchUps;
     private String gGameName;
     private UUID mID;
+    private static final String JSON_GAMENAME = "GameName";
+    private static final String JSON_MATCHUPS = "Matchups";
+
+
+
 }

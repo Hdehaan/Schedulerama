@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.app.PendingIntent.getActivity;
+
 /**
  * Created by hdehaan93 on 3/23/15.
  */
@@ -27,6 +29,7 @@ public class ScheduleActivity extends ActionBarActivity{
     private Bundle mDataBundle;
     private double mNumofTeams;
     private double mNumofGames;
+   // private String mEventName;
     public ArrayList<String> mGameNames;
     public ArrayList<String> mTeamNames;
     private TextView mScheduleTextView;
@@ -37,6 +40,9 @@ public class ScheduleActivity extends ActionBarActivity{
     private Event mEvent;
     public static String mGAMES_LIST_STRING ="GAMES_LIST";
     public static String mGAME_NAME_STRING = "WHAT_IS_THE_NAME_OF_THE_GAME";
+
+
+
 
     /////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Games> ScheduleEvent(ArrayList<String> teams, ArrayList<String> games){
@@ -87,14 +93,17 @@ public class ScheduleActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+
+
         mScheduleTextView=(TextView)findViewById(R.id.schedule_text_view);
         mDataBundle=getIntent().getBundleExtra(BUNDLE_STRING);
         mNumofTeams=mDataBundle.getDouble(DataActivity.mNUM_TEAMS_STRING);
         mNumofGames=mDataBundle.getDouble(DataActivity.mNUM_GAMES_STRING);
+        mEventName = mDataBundle.getString(DataActivity.mEVENT_NAME_STRING);
         mGameNames=getIntent().getStringArrayListExtra(NamingActivity.GAMES_STRING);
         mTeamNames=getIntent().getStringArrayListExtra(NamingActivity.TEAM_STRING);
 
-        mEvent= new Event();
+        mEvent= new Event(mEventName);
         mEvent.setmGames(ScheduleEvent(mTeamNames,mGameNames));
         PrintEvent(mEvent.getmGames());
         //save everything here
@@ -113,8 +122,11 @@ public class ScheduleActivity extends ActionBarActivity{
                 startActivity(i);
 
             }
-        });
 
+
+
+
+        });
 
 
 
@@ -123,7 +135,11 @@ public class ScheduleActivity extends ActionBarActivity{
 
     }
 
-
+    @Override
+    public void onPause(){
+        super.onPause();
+         Event.get(mEventName).saveGames();
+    }
 }
 
 
