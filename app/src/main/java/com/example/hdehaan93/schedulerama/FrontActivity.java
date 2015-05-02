@@ -12,11 +12,21 @@ import android.widget.Button;
 public class FrontActivity extends ActionBarActivity {
 
     private Button mCreateButton;
+    private Button mloadButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front);
         mCreateButton=(Button)findViewById(R.id.create_button);
+        mloadButton=(Button)findViewById(R.id.load_button);
+        mloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start DataActivity
+                Intent i = new Intent(FrontActivity.this, LoadActivity.class);
+                startActivity(i);
+            }
+        });
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
